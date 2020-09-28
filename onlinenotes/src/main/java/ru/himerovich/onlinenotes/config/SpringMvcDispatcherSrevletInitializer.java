@@ -1,7 +1,6 @@
 package ru.himerovich.onlinenotes.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 public class SpringMvcDispatcherSrevletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {

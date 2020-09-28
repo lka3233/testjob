@@ -4,18 +4,18 @@ import javax.persistence.*;
 
 @Entity
 @Table (name = "notes")
-public class MyNote {
+public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column
     private String title;
     @Column
     private String body;
 
-    public MyNote(){};
+    protected Note(){};
 
-    public MyNote(String title, String body) {
+    public Note(String title, String body) {
         this.title = title;
         this.body = body;
     }
