@@ -8,13 +8,19 @@ import java.util.List;
 
 public class NotesDAO implements NotesDAOInterface{
     @Override
-    public Note findByTitle(int id) {
-        return HibernateSessionFactoryInitiation.getSessionFactory().openSession().get(Note.class,id);
+    public List<Note> findByTitle(String title) {
+        Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
+        List<Note> noteList = (List<Note>) session.createQuery("From Note where title like :title").setParameter("title","%"+title+"%").list();
+        session.close();
+        return noteList;
     }
 
     @Override
-    public Note findByBody(String body) {
-        return null;
+    public List<Note> findByBody(String body) {
+        Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
+        List<Note> noteList = (List<Note>) session.createQuery("From Note where body like :body").setParameter("body","%"+body+"%").list();
+        session.close();
+        return noteList;
     }
 
     @Override
@@ -25,28 +31,39 @@ public class NotesDAO implements NotesDAOInterface{
         tx.commit();
         session.close();
     }
-
     @Override
     public void update(Note note) {
         Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        session.update(note);
+        session.saveOrUpdate(note);
         tx.commit();
         session.close();
     }
 
     @Override
     public List<Note> getAll() {
-        List<Note> noteList =(List<Note>) HibernateSessionFactoryInitiation.getSessionFactory().openSession().createQuery("From Note").list();
+        Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
+        List<Note> noteList =(List<Note>)session.createQuery("From Note").list();
+        session.close();
         return noteList;
     }
 
     @Override
-    public void delete(Note note) {
+    public void delete(int id) {
         Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
+        Note note = session.get(Note.class,id);
         session.delete(note);
         tx.commit();
         session.close();
+    }
+
+    @Override
+    public Note getByID(int id) {
+        Session session = HibernateSessionFactoryInitiation.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        Note note = session.get(Note.class,id);
+        session.close();
+        return note;
     }
 }

@@ -13,11 +13,15 @@ public class Note {
     @Column
     private String body;
 
-    protected Note(){};
+    public Note(){}
 
     public Note(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getId() {

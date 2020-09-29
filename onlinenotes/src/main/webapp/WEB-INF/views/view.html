@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
+Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Просмотр заметки</title>
+</head>
+<body>
+<div align="center">
+    <h2>Просмотр заметки</h2>
+    <table border="0" cellpadding="5">
+        <tr>
+            <td>
+                <h3 th:text="${note.title}"></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea th:text="${note.body}" readonly="true"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/">Назад</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
